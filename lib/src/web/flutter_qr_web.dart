@@ -2,9 +2,11 @@
 
 import 'dart:async';
 import 'dart:core';
-import 'dart:html' as html;
-import 'dart:js_util';
-import 'dart:ui' as ui;
+import 'dart:html' if (dart.library.html) 'dart:html' as html;
+import 'dart:js_util' if (dart.library.html) 'dart:js_util';
+import 'dart:ui' if (dart.library.html) 'dart:ui_web' as ui;
+
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter/material.dart';
 
@@ -80,9 +82,12 @@ class _WebQrViewState extends State<WebQrView> {
 
     // video = html.VideoElement();
     WebQrView.vidDiv.children = [video];
-    // ignore: UNDEFINED_PREFIXED_NAME
-    ui.platformViewRegistry
-        .registerViewFactory(viewID, (int id) => WebQrView.vidDiv);
+
+    if (kIsWeb) {
+      // ignore: UNDEFINED_PREFIXED_NAME
+      ui.platformViewRegistry
+          .registerViewFactory(viewID, (int id) => WebQrView.vidDiv);
+    }
     // giving JavaScipt some time to process the DOM changes
     Timer(const Duration(milliseconds: 500), () {
       start();

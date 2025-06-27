@@ -4,7 +4,8 @@ import 'dart:async';
 import 'dart:core';
 import 'dart:html' if (dart.library.html) 'dart:html' as html;
 import 'dart:js_util' if (dart.library.html) 'dart:js_util';
-import 'dart:ui' if (dart.library.html) 'dart:ui_web' as ui;
+import 'dart:ui' as ui;
+import 'dart:ui_web' as ui_web if (dart.library.html) 'dart:ui_web';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -61,7 +62,7 @@ class _WebQrViewState extends State<WebQrView> {
 
   QRViewControllerWeb? _controller;
 
-  late Size _size = const Size(0, 0);
+  late ui.Size _size = const ui.Size(0, 0);
   Timer? timer;
   String? code;
   String? _errorMsg;
@@ -85,7 +86,7 @@ class _WebQrViewState extends State<WebQrView> {
 
     if (kIsWeb) {
       // ignore: UNDEFINED_PREFIXED_NAME
-      ui.platformViewRegistry
+      ui_web.platformViewRegistry
           .registerViewFactory(viewID, (int id) => WebQrView.vidDiv);
     }
     // giving JavaScipt some time to process the DOM changes
@@ -191,7 +192,7 @@ class _WebQrViewState extends State<WebQrView> {
     final imgData = ctx.getImageData(0, 0, canvas.width!, canvas.height!);
 
     final size =
-        Size(canvas.width?.toDouble() ?? 0, canvas.height?.toDouble() ?? 0);
+        ui.Size(canvas.width?.toDouble() ?? 0, canvas.height?.toDouble() ?? 0);
     if (size != _size) {
       setState(() {
         _setCanvasSize(size);

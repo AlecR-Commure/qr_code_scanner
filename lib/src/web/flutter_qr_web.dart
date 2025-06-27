@@ -5,7 +5,7 @@ import 'dart:core';
 import 'dart:html' if (dart.library.html) 'dart:html' as html;
 import 'dart:js_util' if (dart.library.html) 'dart:js_util';
 import 'dart:ui_web' as ui_web if (dart.library.html) 'dart:ui_web';
-import 'size.dart' if (dart.library.html) 'web_size_stub.dart' as ui;
+// import 'size.dart' if (dart.library.html) 'web_size_stub.dart' as ui;
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -62,7 +62,7 @@ class _WebQrViewState extends State<WebQrView> {
 
   QRViewControllerWeb? _controller;
 
-  late ui.Size _size = const ui.Size(0, 0);
+  late Size _size = const Size(0, 0);
   Timer? timer;
   String? code;
   String? _errorMsg;
@@ -192,7 +192,7 @@ class _WebQrViewState extends State<WebQrView> {
     final imgData = ctx.getImageData(0, 0, canvas.width!, canvas.height!);
 
     final size =
-        ui.Size(canvas.width?.toDouble() ?? 0, canvas.height?.toDouble() ?? 0);
+        Size(canvas.width?.toDouble() ?? 0, canvas.height?.toDouble() ?? 0);
     if (size != _size) {
       setState(() {
         _setCanvasSize(size);
@@ -252,7 +252,7 @@ class _WebQrViewState extends State<WebQrView> {
     );
   }
 
-  void _setCanvasSize(ui.Size size) {
+  void _setCanvasSize(Size size) {
     setState(() {
       _size = size;
     });

@@ -4,8 +4,8 @@ import 'dart:async';
 import 'dart:core';
 import 'dart:html' if (dart.library.html) 'dart:html' as html;
 import 'dart:js_util' if (dart.library.html) 'dart:js_util';
-import 'dart:ui' as ui;
 import 'dart:ui_web' as ui_web if (dart.library.html) 'dart:ui_web';
+import 'size.dart' if (dart.library.html) 'web_size_stub.dart' as ui;
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 
